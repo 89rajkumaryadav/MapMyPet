@@ -8,8 +8,6 @@
 import Foundation
 
 enum APIConstants {
-    static let host = "api.petfinder.com"
-    static let grantType = "client_credentials"
-    static let clientId = ""
-    static let clientSecret = ""
+    static let host = "api.rescuegroups.org"
+    static let API_KEY = "sdMvCduH"
 }

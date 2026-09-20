@@ -22,6 +22,9 @@ class DataParser: DataParserProtocol{
     }
     
     func parser<T>(data: Data) throws -> T where T : Decodable {
+        if let string = String(data: data, encoding: .utf8) {
+            print(string)
+        }
         return try jsonDecoder.decode(T.self, from: data)
     }
     

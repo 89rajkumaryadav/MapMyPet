@@ -9,29 +9,20 @@ import Foundation
 
 enum AnimalsRequest: RequestProtocol {
     
-    case getAnimalsWith(page: Int, latitude: Double?, longitude: Double?)
-    
+    case getAnimalsWith(page: Int, limit:Int = 10)
+
     case getAnimalsBy(name: String, age: String?, type: String?)
     
     var path: String {
-        "/v2/animals"
+        "/v5/public/animals"
     }
     
     var urlParams: [String : String?] {
         switch self {
             
-        case let .getAnimalsWith(page: page, latitude: latitude, longitude: longitude):
+        case let .getAnimalsWith(page: page, limit: limit):
             var params = ["page": String(page)]
-            
-            if let latitude = latitude {
-                params["latitude"] = String(latitude)
-            }
-            
-            if let longitude = longitude {
-                params["longitude"] = String(longitude)
-            }
-            
-            params["sort"] = "random"
+            params["limit"] =  String(limit)
             
             return params
             
@@ -53,8 +44,12 @@ enum AnimalsRequest: RequestProtocol {
         
         }
     
-    
+    var headers: [String : String] {
+        [
+            "Authorization": APIConstants.API_KEY,
+            "Content-Type":"application/vnd.api+json"
+        ]
+    }
     var requestType: RequestType { .GET }
-    
-    
 }
+

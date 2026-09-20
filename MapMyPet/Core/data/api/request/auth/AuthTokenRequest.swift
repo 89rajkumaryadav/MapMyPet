@@ -14,18 +14,18 @@ enum AuthTokenRequest: RequestProtocol{
         "/v2/oauth2/token"
     }
     
-    var params: [String: Any] {
+  /*  var params: [String: Any] {
         [
           "grant_type": APIConstants.grantType,
           "client_id": APIConstants.clientId,
           "client_secret": APIConstants.clientSecret
         ]
-      }
-      // 4
+      }  */
+     
       var addAuthorizationToken: Bool {
         false
       }
-      // 5
+     
       var requestType: RequestType {
         .POST
       }

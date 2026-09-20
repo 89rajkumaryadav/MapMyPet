@@ -7,7 +7,17 @@
 
 import Foundation
 
-struct AnimalsContainer: Decodable {
-  let animals: [Animal]
-  let pagination: Pagination
+struct AnimalsContainer: Codable {
+    let meta: Meta
+    let data: [Animal]
 }
+
+struct Meta: Codable {
+    let count: Int
+    let countReturned: Int
+    let pageReturned: Int
+    let limit: Int
+    let pages: Int
+    let transactionId: String
+}
+
