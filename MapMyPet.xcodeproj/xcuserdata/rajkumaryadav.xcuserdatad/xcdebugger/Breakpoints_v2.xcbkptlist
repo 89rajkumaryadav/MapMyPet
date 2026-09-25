@@ -18,36 +18,38 @@
             endingLineNumber = "29"
             landmarkName = "testRequestAnimals()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1E567015-D879-4769-BA11-B4BBF2FF2023 - e761e4edb357f329"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for MapMyPetTests.RequestManagerTests.testRequestAnimals() async throws -&gt; ()"
-                  moduleName = "MapMyPetTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rajkumaryadav/Project/MapMyPet/MapMyPetTests/Tests/Core/data/api/RequestManagerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29">
-               </Location>
-               <Location
-                  uuid = "1E567015-D879-4769-BA11-B4BBF2FF2023 - b8f13b7e8ebc372b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for MapMyPetTests.RequestManagerTests.testRequestAnimals() async throws -&gt; ()"
-                  moduleName = "MapMyPetTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rajkumaryadav/Project/MapMyPet/MapMyPetTests/Tests/Core/data/api/RequestManagerTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4A1F205-3256-495D-8C07-EAE6557051AC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MapMyPetTests/Tests/Core/data/api/AccessTokenManagerTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "testRequestNewToken()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6D790383-9A8E-4C0B-8C73-976C0EF5F121"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MapMyPetTests/Tests/Core/data/api/AccessTokenManagerTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "testRequestNewToken()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
