@@ -8,28 +8,29 @@
 import Foundation
 
 struct Animal: Codable {
-    let type: String
-    let id: String
-    let attributes: AnimalsAttributes
+    var id: String?
+    var type: String?
+    var attributes: AnimalsAttributes?
     
     var picture: URL?{
-        attributes.pictureThumbnailUrl
+        attributes?.pictureThumbnailUrl
     }
     
     var name: String {
-        attributes.name
+        attributes?.name ?? ""
     }
 }
 
 struct AnimalsAttributes: Codable {
-    let name: String
-    let sex: String?
-    let breedString: String?
-    let ageString: String?
-    let descriptionText: String?
-    let pictureCount: Int?
-    let url: URL?
-    let pictureThumbnailUrl: URL?
+    var id: String?
+    var name: String?
+    var sex: String?
+    var breedString: String?
+    var ageString: String?
+    var descriptionText: String?
+    var pictureCount: Int?
+    var url: URL?
+    var pictureThumbnailUrl: URL?
     
 }
 
