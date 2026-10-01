@@ -7,7 +7,7 @@
 
 import CoreData
 
-extension AnimalsAttributes: CoreDataPersistable{
+extension AnimalsAttributes: CoreDataMappable{
    
     typealias ManagedType = AnimalsAttributesEntity
     
@@ -21,7 +21,7 @@ extension AnimalsAttributes: CoreDataPersistable{
             \.pictureCount: "pictureCount",
             \.url: "url",
             \.pictureThumbnailUrl: "pictureThumbnailUrl",
-             \.id : "id"
+            
             
         ]
     }

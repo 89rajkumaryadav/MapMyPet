@@ -22,7 +22,6 @@ struct Animal: Codable {
 }
 
 struct AnimalsAttributes: Codable {
-    var id: String?
     var name: String?
     var sex: String?
     var breedString: String?
