@@ -11,21 +11,13 @@ struct Animal: Codable {
     var id: String?
     var type: String?
     var attributes: AnimalsAttributes?
-    
-    var picture: URL?{
-        attributes?.pictureThumbnailUrl
-    }
-    
-    var name: String {
-        attributes?.name ?? ""
-    }
 }
 
 struct AnimalsAttributes: Codable {
     var name: String?
     var sex: String?
     var breedString: String?
-    var ageString: String?
+    var age: Age?
     var descriptionText: String?
     var pictureCount: Int?
     var url: URL?

@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct AnimalRow: View {
-  let animal: Animal
+  let animal: AnimalEntity
 
   var body: some View {
     HStack {
@@ -37,8 +37,8 @@ struct AnimalRow: View {
 
 struct AnimalRow_Previews: PreviewProvider {
   static var previews: some View {
-    if let animal = Animal.mock.first {
-      AnimalRow(animal: animal)
+      if let animal = Animal.mock.first {
+          AnimalRow(animal: animal.toManagedObject()!)
     }
   }
 }

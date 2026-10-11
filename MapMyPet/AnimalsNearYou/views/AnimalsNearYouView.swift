@@ -9,9 +9,10 @@ import SwiftUI
 
 
 struct AnimalsNearYouView: View {
-  @State var animals: [Animal] = []
-  @State var isLoading = true
-  private let requestManager = RequestManager()
+
+    @FetchRequest(sortDescriptors: [ NSSortDescriptor(keyPath: \AnimalEntity.id, ascending: true)], animation: .default)
+    private var animals: FetchedResults<AnimalEntity>
+    @ObservedObject var viewModel: AnimalsNearYouViewModel
 
   var body: some View {
     NavigationView {
@@ -21,36 +22,29 @@ struct AnimalsNearYouView: View {
         }
       }
       .task {
-        await fetchAnimals()
+          await viewModel.fetchAnimals()
       }
       .listStyle(.plain)
       .navigationTitle("Animals near you")
       .overlay {
-        if isLoading {
+          if viewModel.isLoading {
           ProgressView("Finding Animals near you...")
         }
       }
     }.navigationViewStyle(StackNavigationViewStyle())
   }
 
-  func fetchAnimals() async {
-    do {
-      let animalsContainer: AnimalsContainer = try await requestManager.perform(AnimalsRequest.getAnimalsWith(page: 1))
-        let animals = animalsContainer.data
-      self.animals = animals
-      await stopLoading()
-    } catch {
-    }
-  }
+
 
   @MainActor
   func stopLoading() async {
-    isLoading = false
+      viewModel.isLoading = false
   }
 }
 
 
 
 #Preview {
-    AnimalsNearYouView(animals: Animal.mock, isLoading: false)
+  //  let animals = Animal.mock
+  //  AnimalsNearYouView(animals: Animal.mock, isLoading: false)
 }
