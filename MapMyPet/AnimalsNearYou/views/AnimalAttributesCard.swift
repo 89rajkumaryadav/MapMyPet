@@ -7,12 +7,21 @@
 
 import SwiftUI
 
-struct AnimalAttributesCard: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct AnimalAttributesCard: ViewModifier {
+    let color: Color
+    
+    func body(content: Content) -> some View {
+        content
+            .padding(4)
+            .background(color.opacity(0.2))
+            .cornerRadius(8)
+            .foregroundColor(color)
+            .font(.subheadline)
     }
 }
 
 #Preview {
-    AnimalAttributesCard()
+    Text("Attributes")
+        .modifier(AnimalAttributesCard(color: .gray))
+        .padding()
 }

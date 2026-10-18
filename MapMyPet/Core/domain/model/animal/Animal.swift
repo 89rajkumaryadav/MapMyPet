@@ -17,7 +17,8 @@ struct AnimalsAttributes: Codable {
     var name: String?
     var sex: String?
     var breedString: String?
-    var age: Age?
+    var ageGroup: Age?
+    var ageString: String?
     var descriptionText: String?
     var pictureCount: Int?
     var url: URL?
@@ -27,3 +28,4 @@ struct AnimalsAttributes: Codable {
 
 
 extension Animal: Identifiable {}
+                                     

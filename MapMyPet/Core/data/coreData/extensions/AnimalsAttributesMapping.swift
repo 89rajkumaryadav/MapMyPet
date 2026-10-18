@@ -11,13 +11,13 @@ import CoreData
 extension AnimalsAttributesEntity {
     var age: Age {
         get{
-            guard let ageString = ageString, let age = Age(rawValue: ageString) else{
+            guard let ageGroup = ageGroup, let age = Age(rawValue: ageGroup) else{
                 return Age.unknown
             }
             return age
         }
         set{
-            self.ageString = newValue.rawValue
+            self.ageGroup = newValue.rawValue
         }
     }
 }
@@ -28,7 +28,8 @@ extension AnimalsAttributes{
         self.name = manageObject?.name
         self.sex = manageObject?.sex
         self.breedString = manageObject?.breedString
-        self.age = manageObject?.age
+        self.ageGroup = manageObject?.age
+        self.ageString = manageObject?.ageString
         self.descriptionText = manageObject?.descriptionText
         self.pictureCount = Int(manageObject?.pictureCount ?? 0)
         self.url = manageObject?.url
@@ -41,7 +42,8 @@ extension AnimalsAttributes{
         managedObject.name = name
         managedObject.sex = sex
         managedObject.breedString = breedString
-        managedObject.age = age ?? .unknown
+        managedObject.age = ageGroup ?? .unknown
+        managedObject.ageString = ageString
         managedObject.descriptionText = descriptionText
         managedObject.pictureCount = Int32(self.pictureCount ?? 0)
         managedObject.url = url

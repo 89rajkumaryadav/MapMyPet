@@ -6,6 +6,7 @@
         <relationship name="attributes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AnimalsAttributesEntity" inverseName="animal" inverseEntity="AnimalsAttributesEntity"/>
     </entity>
     <entity name="AnimalsAttributesEntity" representedClassName="AnimalsAttributesEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="ageGroup" optional="YES" attributeType="String"/>
         <attribute name="ageString" optional="YES" attributeType="String"/>
         <attribute name="breedString" optional="YES" attributeType="String"/>
         <attribute name="descriptionText" optional="YES" attributeType="String"/>

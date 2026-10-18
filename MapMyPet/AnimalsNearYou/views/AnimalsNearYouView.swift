@@ -16,11 +16,16 @@ struct AnimalsNearYouView: View {
 
   var body: some View {
     NavigationView {
-      List {
-        ForEach(animals) { animal in
-          AnimalRow(animal: animal)
-        }
-      }
+        AnimalListView(animals: animals, footer: {
+            if !animals.isEmpty && viewModel.hasMoreAnimals {
+                ProgressView("Finding more animals")
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .task {
+                        await viewModel.fetchMoreAnimals()
+                    }
+            }
+        })
       .task {
           await viewModel.fetchAnimals()
       }

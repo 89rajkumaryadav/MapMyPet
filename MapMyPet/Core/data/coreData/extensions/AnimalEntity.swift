@@ -15,6 +15,22 @@ extension AnimalEntity {
     var name: String {
         attributes?.name ?? ""
     }
+    
+    var animalBreedAndType: String {
+        attributes?.breedString ?? ""
+    }
+    
+    var animalDescription: String {
+        attributes?.descriptionText ?? ""
+    }
+    
+    var getAgeDescription: String {
+        if attributes?.age == .unknown && attributes?.ageString != nil {
+            return attributes?.ageString ?? ""
+        }else{
+            return attributes?.age.rawValue ?? ""
+        }
+    }
 }
 
 

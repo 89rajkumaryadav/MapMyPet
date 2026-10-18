@@ -29,6 +29,21 @@ struct AnimalRow: View {
         Text(animal.name)
           .multilineTextAlignment(.center)
           .font(.title3)
+          
+          Text(animal.animalBreedAndType)
+              .font(.callout)
+          
+          if animal.animalDescription.count > 0 {
+              Text(animal.animalDescription)
+                  .lineLimit(2)
+                  .font(.footnote)
+          }
+          
+          HStack {
+              Text(animal.getAgeDescription)
+                  .modifier(AnimalAttributesCard(color: .pink))
+              Text(animal.attributes?.sex ?? "N/A")
+          }
       }
       .lineLimit(1)
     }
