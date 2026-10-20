@@ -16,14 +16,16 @@ struct AnimalsNearYouView: View {
 
   var body: some View {
     NavigationView {
-        AnimalListView(animals: animals, footer: {
-            if !animals.isEmpty && viewModel.hasMoreAnimals {
-                ProgressView("Finding more animals")
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .task {
-                        await viewModel.fetchMoreAnimals()
-                    }
+        AnimalListView(animals: animals,
+                       onReachEnd: {
+            Task {
+                                await viewModel.fetchMoreAnimals()
+                            }
+        },
+                       
+                       footer: {
+            if viewModel.isInitialLoadingDone,viewModel.isMoreAnimalAvailable {
+                paginationFooter
             }
         })
       .task {
@@ -39,15 +41,30 @@ struct AnimalsNearYouView: View {
     }.navigationViewStyle(StackNavigationViewStyle())
   }
 
+    @ViewBuilder
+    private var paginationFooter: some View {
+        if viewModel.isLoadingMore {
+            ProgressView("Finding more animals...")
+                .frame(maxWidth: .infinity)
+                .padding()
+        } else if let error = viewModel.errorMessage {
+            VStack(spacing: 8) {
+                Text(error)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
 
+                Button("Retry") {
+                    Task {
+                        await viewModel.fetchMoreAnimals()
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+        }
+    }
 
-  @MainActor
-  func stopLoading() async {
-      viewModel.isLoading = false
-  }
-}
-
-
+   }
 
 #Preview {
   //  let animals = Animal.mock

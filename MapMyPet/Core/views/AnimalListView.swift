@@ -13,9 +13,15 @@ Data: RandomAccessCollection,
 Data.Element: AnimalEntity {
     let animals: Data
     let footer: Content
+    let onReachEnd: () -> Void
     
-    init(animals: Data, @ViewBuilder footer: () -> Content ) {
+    init(
+        animals: Data,
+        onReachEnd: @escaping () -> Void = {},
+        @ViewBuilder footer: () -> Content
+    ) {
         self.animals = animals
+        self.onReachEnd = onReachEnd
         self.footer = footer()
     }
     
@@ -30,6 +36,10 @@ Data.Element: AnimalEntity {
             ForEach(animals) { animal in
                 NavigationLink(destination: EmptyView()) {
                     AnimalRow(animal: animal)
+                }.onAppear(){
+                    if animal.id == animals.last?.id {
+                        onReachEnd()
+                    }
                 }
             }
             footer

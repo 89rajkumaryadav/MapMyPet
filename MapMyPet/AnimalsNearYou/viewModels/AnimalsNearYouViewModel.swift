@@ -20,8 +20,20 @@ protocol AnimalStore {
 @MainActor
 final class AnimalsNearYouViewModel: ObservableObject {
     
-    @Published var isLoading: Bool = false
-    @Published var hasMoreAnimals: Bool = true
+    enum LoadingState: Equatable {
+        case idle
+        case loading
+        case loaded
+        case failed(String)
+        case isLoadingMore
+    }
+    
+    @Published private(set) var loadingState: LoadingState = .idle
+    private(set) var isMoreAnimalAvailable = true
+    private(set) var isInitialLoadingDone = false
+     
+    
+    
     private let animalFetcher: AnimalsFetcher
     private let animalStore: AnimalStore
 
@@ -31,22 +43,65 @@ final class AnimalsNearYouViewModel: ObservableObject {
         self.animalFetcher = animalFetcher
         self.animalStore = animalStore
     }
+    
+    var isLoading:Bool {
+        loadingState == .loading
+    }
+    
+    var isLoadingMore: Bool {
+        loadingState == .isLoadingMore
+    }
+    
+    var errorMessage: String? {
+        guard case .failed(let message) = loadingState else {
+            return nil
+        }
+        return message
+    }
 
+    
     func fetchAnimals() async {
-        isLoading = true
+        // prevent duplicate initial requests.
+        guard !isLoading, !isInitialLoadingDone else { return }
+       
+        loadingState = .loading
         let animals = await animalFetcher.fetchAnimals(page: page, limit: 5)
         
         do{
             try await animalStore.save(animals: animals)
+            loadingState = .loaded
+            isMoreAnimalAvailable = !animals.isEmpty
+            isInitialLoadingDone = true
         } catch {
             print("Error storing animals... \(error.localizedDescription)")
+            loadingState = .failed(error.localizedDescription)
         }
-        isLoading = false
-        hasMoreAnimals = !animals.isEmpty
+        
+       
     }
     
     func fetchMoreAnimals() async {
-        page += 1
-        await fetchAnimals()
+        // prevent duplicate initial requests.
+        guard !isLoading, !isLoadingMore, isInitialLoadingDone, isMoreAnimalAvailable else { return }
+       
+        loadingState = .isLoadingMore
+        let nextPage = page + 1
+        let animals = await animalFetcher.fetchAnimals(page: nextPage, limit: 5)
+        
+        do{
+            try await animalStore.save(animals: animals)
+            loadingState = .loaded
+            isMoreAnimalAvailable = !animals.isEmpty
+            page = nextPage
+           
+        } catch {
+            print("Error storing animals... \(error.localizedDescription)")
+            loadingState = .failed(error.localizedDescription)
+           
+        }
+        
+       
     }
+    
+  
 }
